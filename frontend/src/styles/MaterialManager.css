@@ -1,0 +1,97 @@
+/* src/styles/MaterialManager.css */
+    .material-manager .upload-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+
+    .material-manager input[type="file"] {
+      flex-grow: 1;
+      border: 1px solid var(--border-color);
+      padding: 8px;
+      border-radius: var(--border-radius);
+      font-size: 0.9em;
+      margin-bottom: 0; /* Override general input margin */
+    }
+
+    .material-manager button {
+      flex-shrink: 0;
+    }
+
+     .selected-file-info {
+        font-size: 0.85em;
+        color: var(--text-light);
+        margin-top: -10px; /* Reduce space after controls */
+        margin-bottom: 15px;
+     }
+
+    .material-list-container {
+      margin-top: 20px;
+      max-height: 300px; /* Limit height and allow scrolling */
+      overflow-y: auto;
+       border-top: 1px solid var(--border-color);
+       padding-top: 15px;
+    }
+
+    .material-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .material-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5px; /* Less padding */
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.2s ease;
+    }
+
+    .material-item:last-child {
+      border-bottom: none;
+    }
+
+    .material-item:hover {
+      background-color: var(--hover-light);
+    }
+
+    .material-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      flex-grow: 1; /* Take available space */
+      overflow: hidden; /* Prevent long names from breaking layout */
+    }
+
+    .material-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; /* Add ... for long names */
+      font-size: 0.95em;
+    }
+
+    .file-icon {
+        font-size: 1.2em;
+        flex-shrink: 0; /* Prevent icon shrinking */
+        color: var(--text-light);
+    }
+     .file-icon.pdf { color: #d9534f; }
+     .file-icon.ppt { color: #f0ad4e; }
+     .file-icon.txt { color: #5bc0de; }
+
+
+    .delete-button {
+      margin-left: 10px; /* Space between name and button */
+       color: var(--error-color);
+    }
+     .delete-button:hover {
+        color: #c9302c; /* Darker red */
+     }
+
+     .material-item.deleting {
+         opacity: 0.5;
+         pointer-events: none; /* Prevent clicking while deleting */
+     }

@@ -1,0 +1,112 @@
+/* src/styles/BlockPalette.css */
+    .block-palette {
+      /* Widget styles already applied */
+    }
+
+    .palette-instruction {
+        font-size: 0.9em;
+        color: var(--text-light);
+        margin-top: -10px; /* Adjust spacing */
+        margin-bottom: 15px;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+      gap: 10px;
+      margin-bottom: 15px; /* Space before custom button */
+    }
+
+    .palette-block {
+      background: #eef4fc; /* Light blue background */
+      border: 1px solid #aaccf0; /* Blue border */
+      padding: 12px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .palette-block:hover {
+      background: #d0e0f8;
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: var(--box-shadow);
+    }
+
+    .palette-block strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+     /* Hide paragraph in palette view for cleaner look */
+     /* .palette-block p { display: none; } */
+
+     .add-custom-button {
+        display: flex; /* Use flex for icon alignment */
+        align-items: center;
+        justify-content: center;
+        width: 100%; /* Full width */
+        background-color: var(--secondary-color);
+        color: white;
+        margin-top: 10px;
+        gap: 8px; /* Space between icon and text */
+     }
+     .add-custom-button:hover {
+        background-color: #e69500; /* Darker orange */
+     }
+     
+     /* Category tabs */
+.palette-categories {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+.palette-category-tab {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background 0.2s;
+}
+.palette-category-tab.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.palette-category-tab:hover {
+    background: var(--hover-light);
+}
+
+/* Snippet preview under titles */
+.palette-snippet {
+  font-size: 0.8em;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  margin: 5px 0 0;
+  max-height: 2.4em; /* roughly two lines */
+  overflow: hidden;
+}
+
+/* Enhanced hover on block cards */
+.palette-block:hover {
+  background: var(--surface-color);
+  border-color: var(--secondary-color);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+/* Active tab underline */
+.palette-category-tab.active {
+  border-bottom: 3px solid var(--secondary-color);
+}
+
+/* Tab font weight */
+.palette-category-tab strong {
+  font-weight: 600;
+}

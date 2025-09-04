@@ -1,0 +1,357 @@
+/* src/styles/TeacherDashboard.css - REFINED */
+
+/* --- Main Layout --- */
+.teacher-dashboard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-color);
+}
+
+/* --- Header --- */
+.dashboard-header {
+    background-color: var(--widget-background);
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color);
+    height: 65px; /* Slightly more space */
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    color: var(--primary-color);
+}
+
+.header-brand h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* --- Main Navigation (in Header) --- */
+.teacher-main-nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-grow: 1;
+    justify-content: center; /* Center the navigation links */
+    margin: 0 2rem;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--text-color-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-medium);
+    transition: all 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent; /* Prepare for active state */
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    background-color: var(--hover-light);
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+    font-weight: 700;
+    background-color: var(--hover-light);
+    border-bottom-color: var(--primary-color); /* Highlight active nav item */
+}
+
+/* --- User Controls (Right side of Header) --- */
+.header-user-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-shrink: 0;
+}
+
+.user-email {
+    color: var(--text-color-secondary);
+    font-size: 0.85em;
+    font-weight: 500;
+    border-right: 1px solid var(--border-color);
+    padding-right: 1.25rem;
+}
+
+/* FIX & REFINEMENT: Logout Button */
+.logout-button {
+    /* Use the standard button class for consistency */
+    background-color: transparent;
+    border: 1px solid var(--error-color-light);
+    color: var(--error-color); /* Visible text color */
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: var(--border-radius-medium);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+    background-color: var(--error-color);
+    color: white; /* White text on hover */
+    border-color: var(--error-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
+}
+
+/* --- Main Content Area (Below Header) --- */
+.teacher-dashboard-content {
+    padding: 1.5rem 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* --- Overview Page Styles --- */
+.dashboard-overview { max-width: 1200px; margin: 0 auto; }
+.dashboard-overview h2 { color: var(--text-color); margin-bottom: 0.5rem; font-size: 1.75rem; font-weight: 700; }
+.dashboard-overview p { color: var(--text-color-secondary); margin-bottom: 2rem; font-size: 1rem; }
+.dashboard-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.dashboard-card {
+    background-color: var(--widget-background);
+    border-radius: var(--border-radius-large);
+    padding: 1.75rem;
+    box-shadow: var(--box-shadow-light);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid transparent;
+}
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-medium);
+    border-left-color: var(--primary-color);
+}
+.dashboard-card.disabled-card {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f9f9f9;
+}
+.dashboard-card.disabled-card:hover {
+    transform: none;
+    box-shadow: var(--box-shadow-light);
+    border-left-color: transparent;
+}
+.dashboard-card svg { color: var(--primary-color); margin-bottom: 1rem; width: 28px; height: 28px; }
+.dashboard-card h3 { margin-top: 0; margin-bottom: 0.5rem; color: var(--text-color); font-size: 1.15rem; font-weight: 600; }
+.dashboard-card p { font-size: 0.9rem; color: var(--text-color-secondary); margin-bottom: 0; line-height: 1.5; text-align: left; }
+
+
+/* --- General Sub-page Styles (e.g., QuizBuilder, Analytics, etc.) --- */
+.page-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.page-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+    .teacher-main-nav {
+        gap: 0.1rem;
+        margin: 0 1rem;
+    }
+    .nav-link {
+        padding: 0.5rem;
+    }
+    .nav-link span { /* Hide text on smaller screens, show only icon */
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    .header-brand {
+        width: 100%;
+    }
+    .teacher-main-nav {
+        width: 100%;
+        justify-content: space-around;
+        margin: 0;
+    }
+    .header-user-controls {
+        width: 100%;
+        justify-content: space-between;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border-color);
+    }
+    .user-email {
+        border: none;
+        padding: 0;
+    }
+    .teacher-dashboard-content {
+        padding: 1rem;
+    }
+}
+/* --- Quiz List Page (Teacher View) --- */
+.quiz-list-page.teacher-view { padding: 0; } /* Padding is now on .teacher-dashboard-content */
+
+.quiz-table {
+    width: 100%; border-collapse: collapse; margin-top: 20px; background-color: var(--widget-background);
+    box-shadow: var(--box-shadow); border-radius: var(--border-radius); overflow: hidden;
+}
+.quiz-table th, .quiz-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+.quiz-table th {
+    background-color: #f8f9fa; font-weight: 600; font-size: 0.85em; color: var(--text-color-secondary);
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+.quiz-table tbody tr:last-child td { border-bottom: none; }
+.quiz-table tbody tr:hover { background-color: #fdfdfd; }
+.quiz-table td.quiz-title { font-weight: 600; color: var(--primary-color); }
+.quiz-table td.quiz-description { font-size: 0.9em; color: var(--text-secondary); max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.status-toggle-btn {
+    display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px;
+    font-size: 0.85em; font-weight: 600; border: 1px solid transparent; cursor: pointer;
+}
+.status-toggle-btn.published { color: var(--success-color); background-color: var(--success-color-light); }
+.status-toggle-btn.published:hover { background-color: #dff0d8; }
+.status-toggle-btn.draft { color: var(--text-color-secondary); background-color: #f0f0f0; border-color: #e0e0e0; }
+.status-toggle-btn.draft:hover { background-color: #e8e8e8; }
+.status-toggle-btn svg { margin-right: 3px; }
+
+.quiz-actions { display: flex; gap: 8px; align-items: center; justify-content: center; }
+.quiz-actions .action-button { padding: 6px; font-size: 1em; line-height: 1; }
+.quiz-actions .action-button.edit { color: var(--primary-color); }
+.quiz-actions .action-button.edit:hover { background-color: var(--hover-light); }
+.quiz-actions .action-button.results { color: #5bc0de; }
+.quiz-actions .action-button.results:hover { background-color: #eef9fc; }
+.quiz-actions .action-button.delete { color: var(--error-color); }
+.quiz-actions .action-button.delete:hover { background-color: var(--error-color-light); }
+
+/* --- Quiz Analytics Page --- */
+.quiz-analytics-page .page-header h2 svg { color: var(--accent-color); }
+.analytics-summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.summary-card {
+    background-color: var(--widget-background); padding: 1.5rem; border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-medium); text-align: center; border-top: 4px solid var(--primary-color);
+}
+.summary-card:nth-child(2) { border-top-color: var(--success-color); }
+.summary-card:nth-child(3) { border-top-color: var(--secondary-color); }
+.summary-card-icon { font-size: 2rem; color: var(--text-color-muted); margin-bottom: 0.75rem; display: block; }
+.summary-card-value { font-size: 2.2rem; font-weight: 700; color: var(--text-color); line-height: 1; margin-bottom: 0.25rem; }
+.summary-card-label { font-size: 0.9rem; color: var(--text-color-secondary); font-weight: 500; }
+.score-badge {
+    font-weight: 600; padding: 0.25em 0.6em; border-radius: var(--border-radius);
+    font-size: 0.9em; color: #fff; white-space: nowrap;
+}
+.score-badge.score-high { background-color: var(--success-color); }
+.score-badge.score-medium { background-color: var(--secondary-color); color: var(--text-color); }
+.score-badge.score-low { background-color: var(--error-color); }
+/*
+================================================
+--- ADDED SECTION: ANALYTICS PAGE STYLES ---
+================================================
+*/
+.teacher-analytics-overview-page .page-header h2 svg {
+    color: var(--secondary-color);
+}
+
+.analytics-quiz-selection-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.analytics-quiz-selection-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: var(--border-radius-medium);
+    margin-bottom: 0.5rem; /* Space between items */
+}
+
+.analytics-quiz-selection-list li:hover {
+    background-color: var(--hover-light);
+}
+
+.analytics-quiz-selection-list .quiz-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.analytics-quiz-selection-list .quiz-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--primary-color);
+}
+
+.analytics-quiz-selection-list .quiz-meta {
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.analytics-quiz-selection-list .quiz-meta .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.2em 0.5em;
+    border-radius: var(--border-radius);
+    font-size: 0.8em;
+    font-weight: 500;
+}
+.analytics-quiz-selection-list .quiz-meta .status.published {
+    background-color: var(--success-color-light);
+    color: var(--success-color);
+}
+.analytics-quiz-selection-list .quiz-meta .status.draft {
+    background-color: #f0f0f0;
+    color: var(--text-color-muted);
+}
+
+.analytics-quiz-selection-list .button.subtle-button {
+    font-size: 0.9em;
+    padding: 0.4rem 0.8rem;
+}

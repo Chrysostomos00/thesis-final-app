@@ -1,0 +1,17 @@
+# Python/Flask dependencies
+venv/
+__pycache__/
+*.pyc
+app.db
+
+# Node/React dependencies
+node_modules/
+build/
+.DS_Store
+
+# IDE and OS files
+.vscode/
+.idea/
+
+# Environment variables (SECURITY)
+.env

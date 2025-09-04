@@ -1,0 +1,173 @@
+/* src/styles/App.css - Playful Refresh */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto:wght@400;500&display=swap');
+
+
+:root {
+    /* Playful Palette */
+    --primary-color: #007AFF;    /* Bright Blue */
+    --primary-color-light: #58A6FF;
+    --primary-color-dark: #0056b3;
+    --secondary-color: #FF9500; /* Bright Orange */
+    --secondary-color-dark: #cc7a00;
+    --accent-color: #4DB6AC;    /* Teal */
+    --accent-color-light: #80CBC4;
+
+    --success-color: #34C759; /* Bright Green */
+    --success-color-light: #e7f7ea;
+    --error-color: #FF3B30;   /* Bright Red */
+    --error-color-light: #ffebee;
+
+    --background-color: #f2f2f7; /* Apple-like light grey */
+    --widget-background: #ffffff;
+    --hover-light: #e7f3ff;    /* Lighter blue hover */
+    --border-color: #e0e0e0;
+
+    --text-color: #1c1c1e;     /* Slightly off-black */
+    --text-color-secondary: #636366;
+    --text-color-link: var(--primary-color);
+    --text-color-on-primary: #ffffff; /* Text on primary buttons */
+    --text-color-on-secondary: #ffffff; /* Text on secondary buttons */
+
+
+    /* Typography & Layout */
+    --font-family-primary: 'Poppins', sans-serif;   /* For headings, buttons */
+    --font-family-secondary: 'Roboto', sans-serif;  /* For body text */
+    --base-font-size: 16px;
+    --line-height-base: 1.6;
+    --border-radius-medium: 10px; /* More rounded */
+    --border-radius-large: 16px; /* Even more rounded */
+
+    /* Playful Shadows */
+    --box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.08);
+    --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --box-shadow-heavy: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+     /* Transitions */
+     --transition-fast: all 0.2s ease-in-out;
+     --transition-std: all 0.3s ease-in-out;
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: var(--font-family-secondary); /* Roboto for body */
+    font-size: var(--base-font-size);
+    line-height: var(--line-height-base);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0; padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.App { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* --- Utility Classes --- */
+.loading-fullscreen { /* Same as before */ }
+@keyframes spin { /* Same as before */ }
+.spin { animation: spin 1s linear infinite; margin-right: 0.5em; vertical-align: middle; }
+
+/* --- Global Messages (More friendly) --- */
+.message {
+    padding: 0.8rem 1.25rem; margin-bottom: 1.5rem; border: none;
+    border-left: 5px solid; /* Colored left border */
+    border-radius: var(--border-radius-medium); display: flex; justify-content: space-between;
+    align-items: center; box-shadow: var(--box-shadow-light); font-size: 0.95em; font-weight: 500;
+}
+.error-message { border-left-color: var(--error-color); background-color: #fff2f1; color: #c7251c; }
+.success-message { border-left-color: var(--success-color); background-color: #eaffe9; color: #1d7d3a; }
+.global-message { margin: 1.5rem 2rem; /* Consistent margin */}
+.message button { /* Close button */
+    background: none; border: none; color: inherit; font-size: 1.2em; cursor: pointer;
+    padding: 0 5px; opacity: 0.7; line-height: 1; font-weight: bold;
+}
+.message button:hover { opacity: 1; transform: scale(1.1); }
+
+/* --- Playful Button Styles --- */
+button, .button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+    font-family: var(--font-family-primary); /* Poppins */ padding: 0.6em 1.4em;
+    border: none; border-radius: var(--border-radius-large); cursor: pointer;
+    font-weight: 700; /* Bolder */ font-size: 0.95rem; line-height: 1.5; text-align: center;
+    vertical-align: middle; text-decoration: none; transition: var(--transition-fast);
+    user-select: none; letter-spacing: 0.5px;
+}
+button svg, .button svg { width: 1.1em; height: 1.1em; }
+
+/* Primary Button */
+button.primary-button, .button.primary-button {
+    color: var(--text-color-on-primary); background: linear-gradient(45deg, var(--primary-color-light), var(--primary-color));
+    box-shadow: 0 4px 10px rgba(0, 122, 255, 0.3); /* Blueish shadow */
+}
+button.primary-button:hover:not(:disabled), .button.primary-button:hover {
+    transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 15px rgba(0, 122, 255, 0.4);
+}
+button.primary-button:active:not(:disabled), .button.primary-button:active { transform: translateY(0px) scale(0.98); box-shadow: 0 2px 5px rgba(0, 122, 255, 0.2);}
+
+/* Secondary Button */
+button.secondary-button, .button.secondary-button {
+    color: var(--text-color-on-secondary); background: linear-gradient(45deg, #FFB900, var(--secondary-color));
+    box-shadow: 0 4px 10px rgba(255, 149, 0, 0.3); /* Orangish shadow */
+}
+button.secondary-button:hover:not(:disabled), .button.secondary-button:hover {
+    transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 15px rgba(255, 149, 0, 0.4);
+}
+button.secondary-button:active:not(:disabled), .button.secondary-button:active { transform: translateY(0px) scale(0.98); box-shadow: 0 2px 5px rgba(255, 149, 0, 0.2); }
+
+/* Subtle Button */
+button.subtle-button, .button.subtle-button {
+    color: var(--text-color-secondary); background-color: transparent; box-shadow: none;
+    padding: 0.5em 1em; font-weight: 500; /* Slightly less bold */ letter-spacing: normal;
+}
+button.subtle-button:hover:not(:disabled), .button.subtle-button:hover {
+    color: var(--primary-color); background-color: var(--hover-light); transform: none; box-shadow: none;
+}
+
+/* Disabled State */
+button:disabled, .button:disabled {
+    background: #e9ecef; /* Flat background */ border-color: #e9ecef;
+    color: var(--text-color-muted); cursor: not-allowed; box-shadow: none; opacity: 0.65; transform: none;
+}
+
+/* --- Playful Input Styles --- */
+input[type="text"], input[type="email"], input[type="password"], input[type="number"],
+textarea, select {
+    padding: 0.7rem 1rem; /* Slightly more padding */ font-family: var(--font-family-secondary);
+    font-size: 1rem; color: var(--text-color); background-color: var(--widget-background);
+    border: 1px solid var(--border-color); border-radius: var(--border-radius-medium); /* More rounded */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); transition: var(--transition-fast);
+    width: 100%; box-sizing: border-box; appearance: none;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-color-light); outline: 0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05), 0 0 0 0.2rem rgba(0, 122, 255, 0.2); /* Lighter focus ring */
+}
+textarea { min-height: 100px; resize: none; } /* Disable resize for consistency */
+select { /* Same arrow style */ }
+/* Checkbox slightly larger/rounder */
+input[type="checkbox"] { /*...*/ border-radius: 0.35em; width: 1.3em; height: 1.3em; }
+input[type="checkbox"]:checked::before { top: 0.15em; left: 0.4em; width: 0.4em; height: 0.75em; }
+
+
+/* --- Playful Widget Style --- */
+.widget {
+    background-color: var(--widget-background); border-radius: var(--border-radius-large); /* More rounded */
+    padding: 1.5rem; box-shadow: var(--box-shadow-medium); margin-bottom: 1.5rem;
+}
+.widget h3, .widget h4 {
+    margin-top: 0; color: var(--text-color); padding-bottom: 0.8rem; margin-bottom: 1rem;
+    font-weight: 700; display: flex; align-items: center; font-family: var(--font-family-primary);
+}
+.widget h3 { font-size: 1.2rem; border-bottom: 1px solid var(--border-color); }
+.widget h4 { font-size: 1.1rem; color: var(--primary-color); border-bottom: none; }
+.widget h3 svg, .widget h4 svg { margin-right: 0.6em; font-size: 1em; color: var(--primary-color);}
+
+
+/* Other elements (Empty list, links...) keep similar styles */
+/* --- General Page Header --- */
+.page-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.page-header h2 { margin: 0; font-size: 1.75rem; font-family: var(--font-family-primary); display: flex; align-items: center; gap: 0.5em; color: var(--text-color); }
+.page-header .button, .page-header .subtle-button { flex-shrink: 0; }
+.back-button svg { margin-right: 0.4em; }

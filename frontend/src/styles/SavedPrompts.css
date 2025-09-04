@@ -1,0 +1,145 @@
+/* src/styles/SavedPrompts.css */
+
+.saved-prompts .loading-prompts {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+}
+
+.prompt-list-container {
+  margin-top: 10px;
+  /* Adjust max-height as needed */
+  max-height: 300px; /* Increased height slightly */
+  overflow-y: auto;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+.prompt-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.prompt-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align vertically center */
+  padding: 10px 8px 10px 12px; /* Adjust padding slightly */
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative; /* For selected indicator */
+}
+
+.prompt-item:last-child {
+  border-bottom: none;
+}
+
+.prompt-item:hover {
+  background-color: var(--hover-light);
+}
+
+/* Highlighting for the currently loaded prompt */
+.prompt-item.selected {
+  background-color: #e0f0ff; /* Light blue background */
+  border-left: 4px solid var(--primary-color);
+  padding-left: 8px; /* Adjust padding for border */
+}
+.prompt-item.selected .prompt-name {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.selected-indicator {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 0.8em; /* Make it subtle */
+}
+
+.prompt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Increased gap slightly */
+  flex-grow: 1;
+  overflow: hidden; /* Prevent overflow */
+  margin-right: 10px; /* Space before buttons */
+}
+
+.prompt-name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prompt-description-preview {
+    font-size: 0.85em;
+    color: var(--text-light);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 95%; /* Ensure it doesn't push buttons */
+}
+
+.prompt-date {
+  font-size: 0.8em;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.prompt-visibility {
+    display: flex;
+    align-items: center;
+    gap: 6px; /* Space between icon and text */
+    font-size: 0.85em; /* Slightly larger */
+    color: var(--text-light);
+    margin-top: 4px; /* Space below other info */
+}
+
+.prompt-visibility .visibility-toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 4px; /* Small clickable area */
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+.prompt-visibility .visibility-toggle:hover {
+    background-color: rgba(0,0,0,0.05); /* Subtle hover */
+}
+
+.prompt-visibility .public-status {
+    font-weight: bold;
+    color: var(--success-color); /* Green for public */
+}
+.prompt-visibility .public-status svg { /* Align icon */
+    vertical-align: middle;
+}
+
+.prompt-visibility .private-status {
+    font-weight: normal;
+    color: var(--text-light); /* Grey for private */
+}
+.prompt-visibility .private-status svg { /* Align icon */
+    vertical-align: middle;
+}
+
+.prompt-item .delete-button {
+    color: var(--error-color);
+    flex-shrink: 0; /* Prevent button shrinking */
+    margin-left: 5px; /* Ensure some space */
+}
+.prompt-item .delete-button:hover {
+    color: #c9302c; /* Darker red */
+    background-color: rgba(217, 83, 79, 0.1); /* Light red background */
+}
+
+.prompt-item.deleting {
+    opacity: 0.5;
+    pointer-events: none;
+}

@@ -1,0 +1,183 @@
+/* --- Γενικό Container για Auth & Role Selector --- */
+.auth-container,
+.role-selector-container {
+    max-width: 480px;
+    margin: 60px auto;
+    padding: 2.5rem 3rem;
+    background-color: var(--widget-background);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-medium);
+    text-align: center;
+    border-top: 5px solid var(--primary-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* --- Λογότυπο --- */
+.auth-logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 12px; /* Ταιριάζει με τη στρογγυλοποίηση της εφαρμογής */
+}
+
+.auth-container h2,
+.role-selector-container h2 {
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-family-primary);
+}
+
+.role-selector-container p {
+    margin-bottom: 2rem;
+    color: var(--text-color-secondary);
+    font-size: 1.05rem;
+}
+
+/* --- Φόρμες (Κοινό στυλ) --- */
+.form-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+}
+
+/* Κουμπί υποβολής φόρμας */
+.auth-container button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    /* Χρησιμοποιεί τα global button styles από το App.css */
+}
+
+.auth-switch {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+}
+
+.auth-switch a {
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: var(--transition-fast);
+}
+
+.auth-switch a:hover {
+    border-bottom-color: var(--primary-color);
+}
+
+
+/* --- Role Selector Κουμπιά --- */
+.role-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.role-link-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.5rem;
+    border-radius: var(--border-radius-medium);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: var(--font-family-primary);
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.role-link-button.teacher {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(53, 111, 161, 0.2);
+}
+
+.role-link-button.teacher:hover {
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(53, 111, 161, 0.3);
+}
+
+.role-link-button.student {
+    background-color: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(77, 182, 172, 0.2);
+}
+
+.role-link-button.student:hover {
+    background-color: #3b9b8f; /* Darker teal */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(77, 182, 172, 0.3);
+}
+
+.role-link-button svg {
+    font-size: 1.2rem;
+}
+
+.register-links {
+    margin-top: 2rem;
+    font-size: 0.9em;
+}
+.register-links a {
+    color: var(--text-color-secondary);
+    margin: 0 5px;
+    font-weight: 500;
+}
+
+/* Μηνύματα σφάλματος/επιτυχίας */
+.auth-container .error-message,
+.auth-container .success-message {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius);
+    animation: fadeIn 0.3s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-container .error-message {
+    background-color: var(--error-color-light);
+    color: var(--error-color);
+    font-weight: 500;
+}
+.auth-container .success-message {
+    background-color: var(--success-color-light);
+    color: var(--success-color);
+    font-weight: 500;
+}
+
+/* Not Found Page Styles */
+.not-found-container {
+    text-align: center;
+    margin-top: 80px;
+    padding: 40px;
+}
+.not-found-container h2 {
+    color: var(--error-color);
+    margin-bottom: 1.5rem;
+}
+.not-found-container p {
+    margin-bottom: 1.5rem;
+    color: var(--text-color-secondary);
+}
+.not-found-container a {
+    font-weight: 600;
+}

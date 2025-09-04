@@ -1,0 +1,90 @@
+/* src/styles/Modal.css */
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 41, 59, 0.6); /* Tailwind's slate-800 with opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050; /* Higher z-index */
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeInBackdrop 0.2s ease-out;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: var(--widget-background);
+    border-radius: var(--border-radius-large); /* Consistent rounding */
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); /* Tailwind shadow-xl */
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideInModal 0.25s ease-out;
+    width: 100%; /* Default width, overridden by maxWidth style prop */
+    border: 1px solid var(--border-color);
+}
+
+@keyframes slideInModal {
+  from { transform: translateY(-20px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem; /* Consistent padding */
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.15rem; /* Slightly smaller for modal titles */
+    font-weight: 700; /* Bolder titles */
+    font-family: var(--font-family-primary);
+    color: var(--text-color);
+}
+
+.modal-close-btn { /* Uses .subtle-button styles + specifics */
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    color: var(--text-color-muted);
+}
+.modal-close-btn:hover {
+     color: var(--text-color);
+     background-color: var(--hover-light); /* Subtle hover */
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto; /* Crucial for scrollable content */
+    flex-grow: 1;
+    background-color: #fcfdff; /* Slightly off-white for body if desired */
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 0.75rem;
+    flex-shrink: 0;
+    background-color: var(--background-color); /* Slightly different footer background */
+    border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
+}
+.modal-footer .button { /* Standardize modal footer buttons */
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
