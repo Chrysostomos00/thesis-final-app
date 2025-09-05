@@ -91,6 +91,33 @@ def add_claims_to_access_token(identity):
 def log_request_info():
     logger.debug(f"Request Received: {request.method} {request.path} from {request.remote_addr}")
 
+# --- Demo routes: health, index, favicon ---
+import os
+from datetime import datetime, timezone
+from flask import jsonify
+
+@app.route("/healthz", methods=["GET", "HEAD"])
+def healthz():
+    # Απλό health check για το Render και για εσάς
+    return {"ok": True}, 200
+
+@app.route("/", methods=["GET"])
+def index():
+    # Μικρό JSON για να φαίνεται ότι "ζει" το service
+    commit = os.environ.get("RENDER_GIT_COMMIT", "")[:7] or "dev"
+    return jsonify({
+        "ok": True,
+        "service": "thesis-backend",
+        "commit": commit,
+        "ts": datetime.now(timezone.utc).isoformat()
+    }), 200
+
+@app.route("/favicon.ico")
+def favicon():
+    # Σταματά τα 404 του favicon στα logs
+    return ("", 204)
+
+
 # --- Error Handlers ---
 @app.errorhandler(404)
 def not_found_error(error):
