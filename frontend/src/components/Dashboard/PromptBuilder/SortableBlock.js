@@ -7,9 +7,7 @@ import { BlockTypes } from '../PromptWorkshop';
 import '../../../styles/PromptWorkshop.css';
 
 function SortableBlock({ id, block, onDeleteBlock, onUpdateBlockContent, isDragging, isOpacityReduced }) {
-  const [isEditing, setIsEditing] = useState(
-    block.type === BlockTypes.CUSTOM_TEXT && block.content.includes('Εισαγάγετε τη δική σας οδηγία...')
-  );
+  const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(block.content);
   const textareaRef = useRef(null);
 
@@ -17,11 +15,13 @@ function SortableBlock({ id, block, onDeleteBlock, onUpdateBlockContent, isDragg
     attributes,
     listeners,
     setNodeRef,
+    setActivatorNodeRef,
     transform,
     transition,
     isDragging: isSortableDragging
   } = useSortable({ id });
 
+  const canEdit = block.type !== BlockTypes.MATERIAL_SUMMARY; 
   const currentlyDragging = isDragging || isSortableDragging;
 
   const style = {
@@ -90,13 +90,18 @@ function SortableBlock({ id, block, onDeleteBlock, onUpdateBlockContent, isDragg
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className={`canvas-block ${currentlyDragging ? 'dragging' : ''} type-${block.type || 'default'}`}
       role="listitem"
       aria-roledescription="Draggable block"
     >
-      <div className="drag-handle-visual subtle-button" title="Σύρετε για αναδιάταξη" aria-label="Drag to reorder">
+          <div
+        ref={setActivatorNodeRef}
+        className="drag-handle-visual subtle-button"
+        title="Σύρετε για αναδιάταξη"
+        aria-label="Drag to reorder"
+        {...attributes}
+        {...listeners}
+  >
         <FaGripVertical />
       </div>
 
@@ -115,16 +120,19 @@ function SortableBlock({ id, block, onDeleteBlock, onUpdateBlockContent, isDragg
             rows={3}
             className="block-textarea"
             onMouseDown={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+            onKeyUp={(e) => e.stopPropagation()}
+            onKeyPress={(e) => e.stopPropagation()}
             aria-label="Edit block content"
           />
         ) : (
           <p
             className="block-text"
-            onDoubleClick={block.type === BlockTypes.CUSTOM_TEXT ? handleEditClick : undefined}
+            onDoubleClick={canEdit ? handleEditClick : undefined}
             aria-label="Block content"
           >
             {block.content}
-            {block.type === BlockTypes.CUSTOM_TEXT && (
+             {canEdit && (
               <FaEdit className="edit-hint-icon" title="Διπλό κλικ για επεξεργασία" aria-hidden="true" />
             )}
           </p>
@@ -143,7 +151,7 @@ function SortableBlock({ id, block, onDeleteBlock, onUpdateBlockContent, isDragg
           </>
         ) : (
           <>
-            {block.type === BlockTypes.CUSTOM_TEXT && (
+             {canEdit && (
               <button onClick={handleEditClick} className="action-button edit subtle-button" title="Επεξεργασία περιεχομένου" aria-label="Edit">
                 <FaEdit />
               </button>
