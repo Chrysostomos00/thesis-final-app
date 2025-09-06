@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { loginUser, registerUser } from '../../services/api';
 import { Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import '../../styles/Auth.css';
 import logo from '../../assets/logo.png';
 
 function AuthForm({ formType, userRole }) {
+  const timerRef = useRef(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,6 +18,17 @@ function AuthForm({ formType, userRole }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setError('');
+    setSuccess('');
+    setLoading(false);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [formType, userRole, location.pathname]);
+  
   const isLogin = formType === 'login';
   const from = location.state?.from?.pathname || (userRole === 'teacher' ? "/teacher/dashboard" : "/student/dashboard");
 
@@ -40,9 +52,10 @@ function AuthForm({ formType, userRole }) {
       try {
         const response = await registerUser(email, password, userRole);
         setSuccess(response.data.message + ' Ανακατεύθυνση στη σύνδεση...');
-        setTimeout(() => {
-          navigate(`/${userRole}/login`);
-        }, 2000);
+        setLoading(false); // σημαντικό: να μην “κολλάει” το κουμπί
+        timerRef.current = setTimeout(() => {
+          navigate(`/${userRole}/login`, { replace: true, state: { justRegistered: true } });
+        }, 1500);
       } catch (err) {
         setError(err.response?.data?.error || 'Η εγγραφή απέτυχε. Παρακαλώ προσπαθήστε ξανά.');
         setLoading(false);
@@ -51,6 +64,7 @@ function AuthForm({ formType, userRole }) {
       try {
         const response = await loginUser(email, password, userRole); // Pass the role
         await login(response.data.access_token);
+        setLoading(false);
         navigate(from, { replace: true });
       } catch (err) {
         setError(err.response?.data?.error || 'Η σύνδεση απέτυχε. Ελέγξτε τα στοιχεία σας.');
