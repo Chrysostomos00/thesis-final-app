@@ -29,6 +29,24 @@ try:
 except ImportError as e:
     logging.critical(f"CRITICAL ERROR - Failed to import database or utils: {e}", exc_info=True)
     raise e
+    
+uri = os.getenv("DATABASE_URL", "")
+# Normalize σε postgresql:// αν έρχεται ως postgres://
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+# Αν η Render DB απαιτήσει SSL (κάποια setups), συμπλήρωσε:
+# if "sslmode=" not in uri:
+#     sep = "&" if "?" in uri else "?"
+#     uri = f"{uri}{sep}sslmode=require"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Προαιρετικό, βοηθά σε stale connections
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {"pool_pre_ping": True}
+print("Using DB:", app.config["SQLALCHEMY_DATABASE_URI"])
+
 
 # --- Configure Logging ---
 log_level = logging.DEBUG if os.getenv("FLASK_ENV") == 'development' else logging.INFO
