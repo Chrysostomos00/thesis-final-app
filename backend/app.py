@@ -84,8 +84,11 @@ try:
 except Exception as e: logger.exception("CRITICAL ERROR - Failed during init_db")
 
 jwt = JWTManager(app); logger.info("JWTManager initialized.")
-allowed_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
-CORS(app, resources={r"/api/*": {"origins": allowed_origins}}, supports_credentials=True); logger.info(f"CORS configured for origins: {allowed_origins}")
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://thesis-final-app-2.onrender.com",   # static site
+])
 migrate = Migrate(app, db); logger.info("Flask-Migrate initialized.")
 
 try:
