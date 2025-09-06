@@ -261,9 +261,12 @@ function PromptWorkshop() {
         setTutorialStep(0);
     };
     const nextTutorialStep = () => {
-        if (tutorialStep < guidedSteps.length - 1) setTutorialStep(s => s + 1);
-        else setIsTutorialActive(false);
-    };
+   if (tutorialStep < guidedSteps.length - 1) {
+     setTutorialStep(s => s + 1);
+   } else {
+     endTutorial();  // <-- κάλεσέ το για σωστό cleanup
+   }
+ };
     const prevTutorialStep = () => {
         if (tutorialStep > 0) setTutorialStep(s => s - 1);
     };
@@ -272,7 +275,10 @@ function PromptWorkshop() {
             highlightedElementRef.current.classList.remove('tutorial-highlight');
             highlightedElementRef.current = null;
         }
+        document.querySelectorAll('.tutorial-highlight').forEach(el => el.classList.remove('tutorial-highlight'));
+        setFocusables([]);
         setIsTutorialActive(false);
+        setTutorialStep(0);
     }, []);
 
     // Smart tooltip positioning near the highlighted element
