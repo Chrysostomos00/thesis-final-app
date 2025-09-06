@@ -422,7 +422,7 @@ function PromptWorkshop() {
     return (
         <div className="prompt-workshop-page page-content-wrapper">
             <div className="page-header">
-                <h2><FaEdit /> Εργαστήριο Βοηθών AI</h2>
+                <h2><FaEdit /> Εργαστήρι Βοηθών AI</h2>
                 <button onClick={startTutorial} className="button subtle-button">
                     <FaQuestion /> Γρήγορη Περιήγηση
                 </button>
